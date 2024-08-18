@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import MainContent
 
 def index(request):
-    return render(request, 'mysite/index.html')
-# Create your views here.
+    content_list = MainContent.objects.order_by('-pub_date')
+    context = {'content_list': content_list}
+    return render(request, 'mysite/content_list.html',context)
